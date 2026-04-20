@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://ctoau821l8nlw"]
+
+[ext_resource type="Script" uid="uid://bd8wstx227dnx" path="res://entities/barco.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://krcbqdpfa880" path="res://scenes/obstaculo.gd" id="2_0wfyh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgp6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5qli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+albedo_color = Color(0, 0.6935267, 0.69352645, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_o5qli"]
+material = SubResource("StandardMaterial3D_sgp6g")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wfyh"]
+
+[node name="Main" type="Node3D" unique_id=992752268]
+
+[node name="Barco" type="CharacterBody3D" parent="." unique_id=663280434]
+transform = Transform3D(0.66, 0, 0, 0, -2.8849517e-08, 0.66, 0, -0.66, -2.8849517e-08, -0.14, 0, 3)
+script = ExtResource("1_o5qli")
+velocidade_do_barco_frente = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barco" unique_id=1809562841]
+visible = false
+mesh = SubResource("CapsuleMesh_sgp6g")
+
+[node name="Camera3D" type="Camera3D" parent="Barco" unique_id=771370793]
+transform = Transform3D(1.5151515, 0, 0, 0, 0.5182123, -1.4237767, 0, 1.4237767, 0.5182123, 0, -3.3969698, 2.2727275)
+fov = 77.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barco" unique_id=1341515857]
+shape = SubResource("CapsuleShape3D_o5qli")
+debug_color = Color(0.9254902, 0, 0.6784314, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1765928498]
+transform = Transform3D(1, 0, 0, 0, 0.0018675027, 0.99999833, 0, -0.99999833, 0.0018675027, 0, 27.34684, 11.966738)
+
+[node name="Rio" type="Node3D" parent="." unique_id=656703941]
+transform = Transform3D(5, 0, 0, 0, -4.371139e-06, 1, 0, -100, -4.371139e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rio" unique_id=1879459785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44748572, 1.9560223e-06)
+mesh = SubResource("QuadMesh_o5qli")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=906894994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6702385, 0, 0)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=724389454]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[connection signal="body_entered" from="Area3D" to="Barco" method="_on_area_3d_body_entered"]

@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://ctoau821l8nlw"]
+
+[ext_resource type="Script" uid="uid://bd8wstx227dnx" path="res://entities/barco.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://krcbqdpfa880" path="res://scenes/obstaculo.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://w2ssmq652yxe" path="res://scenes/pontuacao.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://cufy523j2rkwv" path="res://scenes/lixos.gd" id="4_jyhfs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgp6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5qli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+albedo_color = Color(0, 0.6935267, 0.69352645, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_o5qli"]
+material = SubResource("StandardMaterial3D_sgp6g")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wfyh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sugp2"]
+
+[node name="Main" type="Node3D" unique_id=992752268]
+
+[node name="Control" type="Control" parent="." unique_id=1756604404]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LixoColetado" type="Label" parent="Control" unique_id=2127366111]
+layout_mode = 0
+offset_left = 480.0
+offset_right = 570.44
+offset_bottom = 23.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("3_sugp2")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=771370793]
+transform = Transform3D(1, 0, 0, 0, 0.9396927, 0.34202018, 0, -0.34202018, 0.9396927, -0.14, 1.5000004, 5.242)
+fov = 77.0
+
+[node name="Barco" type="CharacterBody3D" parent="." unique_id=663280434 node_paths=PackedStringArray("mesh_node", "score_label")]
+transform = Transform3D(0.66, 0, 0, 0, -2.8849517e-08, 0.66, 0, -0.66, -2.8849517e-08, -0.14, 0, 3)
+script = ExtResource("1_o5qli")
+speed = 5.0
+smooth_weight = 0.1
+rotation_steer = 1.0
+mesh_node = NodePath("MeshInstance3D")
+score_label = NodePath("../Control/LixoColetado")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Barco" unique_id=1809562841]
+mesh = SubResource("CapsuleMesh_sgp6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barco" unique_id=1341515857]
+shape = SubResource("CapsuleShape3D_o5qli")
+debug_color = Color(0.9254902, 0, 0.6784314, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1765928498]
+transform = Transform3D(1, 0, 0, 0, 0.0018675027, 0.99999833, 0, -0.99999833, 0.0018675027, 0, 27.34684, 11.966738)
+
+[node name="Rio" type="Node3D" parent="." unique_id=656703941]
+transform = Transform3D(5, 0, 0, 0, -4.371139e-06, 1, 0, -100, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rio" unique_id=1879459785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44748572, 1.9560223e-06)
+mesh = SubResource("QuadMesh_o5qli")
+
+[node name="Obstaculos" type="Node3D" parent="." unique_id=1916157829]
+
+[node name="Obstaculo" type="Area3D" parent="Obstaculos" unique_id=906894994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo" unique_id=724389454]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo2" type="Area3D" parent="Obstaculos" unique_id=1016783712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo2" unique_id=265973798]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo3" type="Area3D" parent="Obstaculos" unique_id=508964021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo3" unique_id=927491624]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo4" type="Area3D" parent="Obstaculos" unique_id=2090512380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo4" unique_id=80768659]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo5" type="Area3D" parent="Obstaculos" unique_id=1193334770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo5" unique_id=1662093160]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo6" type="Area3D" parent="Obstaculos" unique_id=632141871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo6" unique_id=1380462574]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Obstaculo7" type="Area3D" parent="Obstaculos" unique_id=1369507685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstaculos/Obstaculo7" unique_id=1585885543]
+shape = SubResource("BoxShape3D_0wfyh")
+debug_color = Color(0.77254903, 0.44313726, 0, 1)
+
+[node name="Lixos" type="Node3D" parent="." unique_id=2115890249]
+script = ExtResource("4_jyhfs")
+
+[node name="Lixo" type="Area3D" parent="Lixos" unique_id=116143252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo" unique_id=1674152706]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo2" type="Area3D" parent="Lixos" unique_id=1003116455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo2" unique_id=1858413329]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo3" type="Area3D" parent="Lixos" unique_id=10101126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo3" unique_id=2073998277]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo4" type="Area3D" parent="Lixos" unique_id=1198912908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo4" unique_id=1606389410]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo5" type="Area3D" parent="Lixos" unique_id=1475082978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo5" unique_id=1286579334]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo6" type="Area3D" parent="Lixos" unique_id=267635964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo6" unique_id=1176532642]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo7" type="Area3D" parent="Lixos" unique_id=51232244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo7" unique_id=50094196]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo8" type="Area3D" parent="Lixos" unique_id=1784493075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo8" unique_id=286213297]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo9" type="Area3D" parent="Lixos" unique_id=1126966338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo9" unique_id=482586162]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo10" type="Area3D" parent="Lixos" unique_id=989079740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo10" unique_id=164339214]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo11" type="Area3D" parent="Lixos" unique_id=354323977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo11" unique_id=1048285700]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo12" type="Area3D" parent="Lixos" unique_id=2057476178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo12" unique_id=181143976]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo13" type="Area3D" parent="Lixos" unique_id=1751070440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo13" unique_id=814361663]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo14" type="Area3D" parent="Lixos" unique_id=2096868515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo14" unique_id=1516651380]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="Lixo15" type="Area3D" parent="Lixos" unique_id=1078352342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+script = ExtResource("2_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lixos/Lixo15" unique_id=50613087]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[connection signal="body_entered" from="Obstaculos/Obstaculo" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo2" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo3" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo4" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo5" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo6" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Obstaculos/Obstaculo7" to="Barco" method="_on_obstacle_collision"]
+[connection signal="body_entered" from="Lixos/Lixo" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo2" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo3" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo4" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo5" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo6" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo7" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo8" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo9" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo10" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo11" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo12" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo13" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo14" to="Barco" method="_on_trash_collected"]
+[connection signal="body_entered" from="Lixos/Lixo15" to="Barco" method="_on_trash_collected"]

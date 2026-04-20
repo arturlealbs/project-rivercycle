@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="project-rivercycle"
+run/main_scene="uid://ctoau821l8nlw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
