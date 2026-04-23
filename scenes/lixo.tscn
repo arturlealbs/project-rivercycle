@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://1beuryuy36m8"]
+
+[ext_resource type="Script" uid="uid://klaciig28v88" path="res://scenes/trash.gd" id="1_1bnrr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sugp2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jyhfs"]
+
+[node name="Lixo" type="Area3D" unique_id=452144631]
+script = ExtResource("1_1bnrr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1528547535]
+shape = SubResource("SphereShape3D_sugp2")
+debug_color = Color(0, 0.64705884, 0.21960784, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1807986934]
+mesh = SubResource("SphereMesh_jyhfs")

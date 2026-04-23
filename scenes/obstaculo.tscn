@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cc53y83xbxxnh"]
+
+[ext_resource type="Script" uid="uid://cy71llskc2pwp" path="res://scenes/obstacle.gd" id="1_parxj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyhfs"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jyhfs"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_parxj"]
+spread = 180.0
+initial_velocity_max = 9.9
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+
+[sub_resource type="BoxMesh" id="BoxMesh_fc832"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Obstaculo" type="Area3D" unique_id=87579114]
+monitorable = false
+script = ExtResource("1_parxj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1877998540]
+shape = SubResource("BoxShape3D_jyhfs")
+debug_color = Color(0.72156864, 0.47843137, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1339684839]
+mesh = SubResource("BoxMesh_jyhfs")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1283723430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09330034, 1.3137047, 0)
+cast_shadow = 0
+emitting = false
+lifetime = 0.6
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_parxj")
+draw_pass_1 = SubResource("BoxMesh_fc832")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

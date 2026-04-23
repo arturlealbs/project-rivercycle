@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dfhddxgpajr6q"]
+
+[ext_resource type="Script" uid="uid://bd8wstx227dnx" path="res://entities/barco.gd" id="1_p7uf6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sgp6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5qli"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p7uf6"]
+radius = 0.7714844
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7uf6"]
+albedo_color = Color(0.18335831, 0.33352226, 0.3287678, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3hvaf"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 1.055, 10)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gxbca"]
+size = Vector2(0.02, 0.22)
+
+[node name="Barco" type="CharacterBody3D" unique_id=1267637844 node_paths=PackedStringArray("mesh_node")]
+transform = Transform3D(0.66, 0, 0, 0, -2.8849517e-08, 0.66, 0, -0.66, -2.8849517e-08, 0, 0, 0)
+script = ExtResource("1_p7uf6")
+speed = 5.0
+smooth_weight = 0.1
+rotation_steer = 1.0
+mesh_node = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1871611640]
+mesh = SubResource("CapsuleMesh_sgp6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1816234102]
+shape = SubResource("CapsuleShape3D_o5qli")
+debug_color = Color(0.9254902, 0, 0.6784314, 1)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=670519053]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1083524977]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.7841327, 3.4275537e-08)
+shape = SubResource("CapsuleShape3D_p7uf6")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=796204631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1997032, -3.3542264, 2.1116905)
+material_override = SubResource("StandardMaterial3D_p7uf6")
+explosiveness = 0.71
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3hvaf")
+draw_pass_1 = SubResource("QuadMesh_gxbca")
+
+[node name="Timer" type="Timer" parent="." unique_id=1231375018]
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

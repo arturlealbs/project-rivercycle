@@ -15,6 +15,10 @@ run/main_scene="uid://ctoau821l8nlw"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://bg34qhiob4ow"
+
 [dotnet]
 
 project/assembly_name="SaoCaetano"
